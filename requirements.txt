@@ -1,0 +1,5 @@
+isort==5.10.1
+numpy==1.22.2
+PyYAML==6.0
+reportlab==3.6.8
+requests==2.27.1
