@@ -19,7 +19,8 @@ import platform
 from numpy import append
 import threading
 from concurrent.futures import ThreadPoolExecutor
-
+import subprocess 
+import socket
 
 
 
@@ -45,7 +46,7 @@ class bgcolors:
 
 def system_info():
     print("System: "+platform.system())
-    print("Release"+platform.release())
+    print("Release: "+platform.release())
 
 
 def user_information(name,host):
@@ -490,7 +491,49 @@ def search_owner_files():
     #                     print(list_file_mod)
     #                     u += 1
 
+
+
+class log_files():
+
+
+    def log_file_cp(name):
+        path1 = "/var/log/*"
+        try:
+            os.system(f" mkdir /home/{name}/linux-information-files/logfiles")
+            os.system(f"cp {path1} /home/{name}/linux-information-files/logfiles/")
+        except:
+            skip
+
+
+
+    def cups(name):
+        print(bgcolors.GREEN+"[*] Cups "+bgcolors.ENDC)
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        result = sock.connect_ex(('127.0.0.1',631)) # port  631
+        if result == 0:
+            print("Port is open - Cups Working - 127.0.0.1:631")
+        else:
+            print("Port is not open - Cups Not Working")
+        sock.close()
     
+    def httpd():
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 print(bgcolors.GREEN+'''
@@ -551,14 +594,14 @@ active_port(username)
 
 
 print(bgcolors.GREEN+"[*] Users Owner files: "+bgcolors.ENDC)
-users_files(username)
+# users_files(username)
 
 print(bgcolors.GREEN+"[*] Owner files detected"+bgcolors.ENDC)
 # search_owner_files(username)
 
 
-
-
+print(bgcolors.GREEN+"[*] LOG FİLES "+bgcolors.ENDC)
+log_files.cups(username)
 
 
 
